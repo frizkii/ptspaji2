@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.myapplication.RS;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -62,67 +63,30 @@ public class RegisterActivity extends AppCompatActivity {
                         .setPriority(Priority.MEDIUM)
                         .setOkHttpClient(((RS) getApplication()) .getOkHttpClient())
                         .build()
-                        .getAsJSONArray(new JSONArrayRequestListener() {
+                        .getAsJSONObject(new JSONObjectRequestListener() {
                             @Override
-                            public void onResponse(JSONArray response) {
-                                try {
-                                    Toast.makeText(RegisterActivity.this, "This is my Toast message!",
-                                            Toast.LENGTH_LONG).show();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                    Toast.makeText(RegisterActivity.this, "G",
-                                            Toast.LENGTH_LONG).show();
+                            public void onResponse(JSONObject response) {
+                                String message = response.optString(Config.RESPONSE_MESSAGE_FIELD);
+                                if (message.equalsIgnoreCase(Config.RESPONSE_STATUS_VALUE_SUCCESS)) {
+                                    Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);//CUSTOMER
+                                    startActivity(intent);
+                                    finish();
+                                    finishAffinity();
+                                }else {
+                                    Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
                                 }
-
                             }
-
                             @Override
                             public void onError(ANError anError) {
-
+                                Toast.makeText(RegisterActivity.this, Config.TOAST_AN_EROR, Toast.LENGTH_SHORT).show();
+                                Log.d("HBB", "onError: " + anError.getErrorBody());
+                                Log.d("HBB", "onError: " + anError.getLocalizedMessage());
+                                Log.d("HBB", "onError: " + anError.getErrorDetail());
+                                Log.d("HBB", "onError: " + anError.getResponse());
+                                Log.d("HBB", "onError: " + anError.getErrorCode());
                             }
                         });
             }
-
-//            @Override
-//            public void onClick(View view) {
-//                final String email = regEmail.getText().toString();
-//                final String alamat = regAlamat.getText().toString();
-//                final String password = regPassword.getText().toString();
-//                final String nama = regNama.getText().toString();
-//                final String hp = regHp.getText().toString();
-//                final String ktp = regKtp.getText().toString();
-//
-//                HashMap<String, String> body = new HashMap<>();
-////                body.put("act", "register_konsumen");
-////                body.put("id", phone);
-//                body.put("email", email);
-//                body.put("password",password);
-//                body.put("nama", nama);
-//                body.put("alamat", alamat);
-//                body.put("noktp", ktp);
-//                AndroidNetworking.post("http://localhost:8000/api/register")
-//                        .addBodyParameter(body)
-//                        .setPriority(Priority.MEDIUM)
-////                        .setOkHttpClient(((RS) getApplication()).getOkHttpClient())
-//                        .build()
-//                        .getAsJSONArray(new JSONArrayRequestListener() {
-//                            @Override
-//                            public void onResponse(JSONArray response) {
-//                                try {
-//                                    Toast.makeText(RegisterActivity.this, "This is my Toast message!",
-//                                            Toast.LENGTH_LONG).show();
-//                                } catch (Exception e) {
-//                                    e.printStackTrace();
-//                                }
-//
-//                            }
-//
-//                            @Override
-//                            public void onError(ANError anError) {
-//
-//                            }
-//                        });
-//            }
         });
     }
     public void orLogin(View view){

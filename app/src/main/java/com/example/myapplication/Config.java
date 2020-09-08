@@ -132,7 +132,7 @@ public class Config {
         public static final String SHARED_PREF_TAG_TOKEN = "SHARED_PREF_TAG_TOKEN";
 
         public static final String RESPONSE_STATUS_FIELD = "STATUS";
-        public static final String RESPONSE_STATUS_VALUE_SUCCESS = "Succes Login";
+        public static final String RESPONSE_STATUS_VALUE_SUCCESS = "SUCCES";
         public static final String RESPONSE_STATUS_VALUE_ERROR = "ERROR";
         public static final String RESPONSE_MESSAGE_FIELD = "message";
         public static final String RESPONSE_PAYLOAD_FIELD = "data";

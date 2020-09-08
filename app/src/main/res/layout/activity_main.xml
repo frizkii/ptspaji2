@@ -37,6 +37,7 @@
                     android:layout_height="wrap_content"/>
             <EditText
                     android:id="@+id/logEmail"
+                    android:textColor="@color/basecolor"
                     android:background="@drawable/edittext"
                     android:layout_width="@dimen/_220sdp"
                     android:layout_height="@dimen/_35sdp"/>
@@ -79,7 +80,6 @@
                     android:background="@drawable/btnlogin"
                     android:layout_width="@dimen/_55sdp"
                     android:text="Login"
-                    android:textStyle="bold"
                     android:textColor="#9997dd"
                     android:layout_height="@dimen/_23sdp"/>
             <TextView

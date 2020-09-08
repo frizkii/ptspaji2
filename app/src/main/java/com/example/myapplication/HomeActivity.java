@@ -29,7 +29,7 @@ public class HomeActivity extends AppCompatActivity {
     Adapter adapter;
 
     Button btn;
-   boolean sds;
+    boolean sds;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +61,12 @@ public class HomeActivity extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false);
         dataList.setLayoutManager(gridLayoutManager);
         dataList.setAdapter(adapter);
+
+        Bundle extras = getIntent().getExtras();
+        String value = extras.getString("userid");
+//        if(extras != null){
+//            String value = extras.getString("userid");
+//        }
     }
 
     public void btnprofil(View view){

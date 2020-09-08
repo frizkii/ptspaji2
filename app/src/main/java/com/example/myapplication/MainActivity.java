@@ -57,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
                 body.put("email", email);
                 body.put("password", password);
 
-
-
                     AndroidNetworking.post(Config.BASE_URL + "login")
                             .addBodyParameter(body)
                             .setPriority(Priority.MEDIUM)
@@ -67,41 +65,27 @@ public class MainActivity extends AppCompatActivity {
                             .getAsJSONObject(new JSONObjectRequestListener() {
                                 @Override
                                 public void onResponse(JSONObject response) {
-
-
-//                                    String status = response.optString(Config.RESPONSE_STATUS_FIELD);
                                     String message = response.optString(Config.RESPONSE_MESSAGE_FIELD);
                                     if (message.equalsIgnoreCase(Config.RESPONSE_STATUS_VALUE_SUCCESS)) {
-                                        String role = response.optString("role");
-//                                    String U_ID = payload.optString("U_ID");
-//                                    String U_NAME = payload.optString("U_NAME");
-//                                    String U_PHONE = payload.optString("U_PHONE");
-//                                    String U_EMAIL = payload.optString("U_EMAIL");
-
-//                                    preferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-//                                    preferences.edit()
-//                                            .putString(Config.LOGIN_ID_SHARED_PREF, U_ID)
-//                                            .putString(Config.LOGIN_NAME_SHARED_PREF, U_NAME)
-//                                            .putString(Config.LOGIN_PHONE_SHARED_PREF, U_PHONE)
-//                                            .putString(Config.LOGIN_GROUP_ID_SHARED_PREF, U_GROUP_ROLE)
-//                                            .putString(Config.LOGIN_EMAIL_SHARED_PREF, U_EMAIL)
-//                                            .apply();
-
-                                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);//CUSTOMER
+                                        JSONObject payload = response.optJSONObject("data");
+                                        String role = payload.optString("role_user");
+                                        int userid = payload.optInt("id");
+                                        Log.e("AF", "id: "+userid);
+                                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                        intent.putExtra("userid",userid);
+                                        startActivity(intent);
                                         if (role.equalsIgnoreCase("2"))
-                                            intent = new Intent(MainActivity.this, DetailActivity.class);
-Log.d("YZD", "respon : " + role);
+                                            intent = new Intent(MainActivity.this, ViewCustomer.class);
                                         startActivity(intent);
                                         Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
                                         finish();
                                         finishAffinity();
-//                                    } else {
-//                                        Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-//                                    }
-
-//                                    mProgress.dismiss();
+                                    }else {
+                                        Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
                                     }
-                                }
+
+                                    }
+
 
                                 @Override
                                 public void onError(ANError anError) {

@@ -37,8 +37,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <EditText
-                   android:id="@+id/regEmail"
+                    android:id="@+id/regEmail"
                     android:background="@drawable/edittext"
+                    android:textColor="#9997dd"
+                    android:inputType="textEmailAddress"
                     android:layout_width="@dimen/_220sdp"
                     android:layout_height="@dimen/_35sdp"/>
         </LinearLayout>
@@ -58,8 +60,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <EditText
-                android:id="@+id/regPassword"
+                    android:id="@+id/regPassword"
                     android:textColor="#9997dd"
+                    android:inputType="textPassword"
                     android:background="@drawable/edittext"
                     android:layout_width="@dimen/_220sdp"
                     android:layout_height="@dimen/_35sdp"/>
@@ -80,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <EditText
-                android:id="@+id/regNama"
+                    android:id="@+id/regNama"
                     android:inputType="textPassword"
                     android:textColor="#9997dd"
                     android:background="@drawable/edittext"
@@ -103,7 +106,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <EditText
-                android:id="@+id/regHp"
+                    android:id="@+id/regHp"
+                    android:textColor="#9997dd"
+                    android:inputType="number"
                     android:background="@drawable/edittext"
                     android:layout_width="@dimen/_220sdp"
                     android:layout_height="@dimen/_35sdp"/>
@@ -124,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <EditText
-                android:id="@+id/regAlamat"
+                    android:id="@+id/regAlamat"
                     android:textColor="#9997dd"
                     android:background="@drawable/edittext"
                     android:layout_width="@dimen/_220sdp"
@@ -146,8 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <EditText
-                android:id="@+id/regKtp"
-                    android:inputType="textPassword"
+                    android:id="@+id/regKtp"
                     android:textColor="#9997dd"
                     android:background="@drawable/edittext"
                     android:layout_width="@dimen/_220sdp"
