@@ -1,23 +1,18 @@
 package com.example.myapplication;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidnetworking.AndroidNetworking;
@@ -29,13 +24,13 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class HTTPHandler extends RecyclerView.Adapter<HTTPHandler.ItemViewHolder> {
+class HTTPHandler2 extends RecyclerView.Adapter<HTTPHandler2.ItemViewHolder> {
     private Context context;
     private List<ModelUserAdmin> mList;
     private boolean mBusy = false;
     private ViewCustomerAdmin mAdminUserActivity;
 
-    public HTTPHandler(Context context, List<ModelUserAdmin> mList, Activity AdminUserActivity) {
+    public HTTPHandler2(Context context, List<ModelUserAdmin> mList, Activity AdminUserActivity) {
         this.context = context;
         this.mList = mList;
         this.mAdminUserActivity = (ViewCustomerAdmin) AdminUserActivity;
@@ -43,14 +38,14 @@ public class HTTPHandler extends RecyclerView.Adapter<HTTPHandler.ItemViewHolder
 
     @NonNull
     @Override
-    public HTTPHandler.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.custom_grid_customer, parent, false);
+        View view = inflater.inflate(R.layout.custom_grid_layout, parent, false);
         return new ItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HTTPHandler.ItemViewHolder holder, int i) {
+    public void onBindViewHolder(@NonNull ItemViewHolder holder, int i) {
         final ModelUserAdmin Amodel = mList.get(i);
         holder.bind(Amodel);
     }
@@ -70,39 +65,40 @@ public class HTTPHandler extends RecyclerView.Adapter<HTTPHandler.ItemViewHolder
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv_nama, tv_phone,tv_email,tv_noktp,tv_alamat;
+        private TextView txtvw,price;
+        private Button sewa;
         private ImageView delete;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             context = itemView.getContext();
-            tv_nama = itemView.findViewById(R.id.tv_nama);
-            tv_phone = itemView.findViewById(R.id.tv_phone);
-            tv_email = itemView.findViewById(R.id.tv_email);
-            tv_noktp = itemView.findViewById(R.id.tv_noktp);
-            tv_alamat = itemView.findViewById(R.id.tv_alamat);
-            delete = itemView.findViewById(R.id.hapusitem);
+            txtvw = itemView.findViewById(R.id.tv_nama);
+            price = itemView.findViewById(R.id.tv_phone);
+//            tv_email = itemView.findViewById(R.id.tv_email);
+//            tv_noktp = itemView.findViewById(R.id.tv_noktp);
+//            tv_alamat = itemView.findViewById(R.id.tv_alamat);
+//            delete = itemView.findViewById(R.id.hapusitem);
         }
 
         private void bind(final ModelUserAdmin Amodel) {
-            tv_nama.setText(Amodel.getNama());
-            tv_phone.setText(Amodel.getNohp());
-            tv_email.setText(Amodel.getEmail());
-            tv_noktp.setText(Amodel.getNoktp());
-            tv_alamat.setText(Amodel.getAlamat());
+            txtvw.setText(Amodel.getNama());
+            price.setText(Amodel.getNohp());
+//            tv_email.setText(Amodel.getEmail());
+//            tv_noktp.setText(Amodel.getNoktp());
+//            tv_alamat.setText(Amodel.getAlamat());
 
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, EditCustomer.class);
-                    intent.putExtra("id",Integer.valueOf(Amodel.getId()));
-                    intent.putExtra("email",String.valueOf(Amodel.getEmail()));
-                    intent.putExtra("password",String.valueOf(Amodel.getPassword()));
-                    intent.putExtra("nama",String.valueOf(Amodel.getNama()));
-                    intent.putExtra("nohp",String.valueOf(Amodel.getNohp()));
-                    intent.putExtra("noktp",String.valueOf(Amodel.getNoktp()));
-                    intent.putExtra("alamat",String.valueOf(Amodel.getAlamat()));
-                    context.startActivity(intent);
+//                    Intent intent = new Intent(context, EditCustomer.class);
+//                    intent.putExtra("id",Integer.valueOf(Amodel.getId()));
+//                    intent.putExtra("email",String.valueOf(Amodel.getEmail()));
+//                    intent.putExtra("password",String.valueOf(Amodel.getPassword()));
+//                    intent.putExtra("nama",String.valueOf(Amodel.getNama()));
+//                    intent.putExtra("nohp",String.valueOf(Amodel.getNohp()));
+//                    intent.putExtra("noktp",String.valueOf(Amodel.getNoktp()));
+//                    intent.putExtra("alamat",String.valueOf(Amodel.getAlamat()));
+//                    context.startActivity(intent);
                 }
             });
 

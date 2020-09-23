@@ -11,10 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ViewItem"></activity>
-        <activity android:name=".ViewCustomer">
-
-        </activity>
+        <activity android:name=".EditCustomer"></activity>
+        <activity android:name=".blank"></activity>
+        <activity android:name=".ActivityViewBicycle" />
+        <activity android:name=".WhereAdmin" />
+        <activity android:name=".ViewItem" />
+        <activity android:name=".ViewCustomerAdmin" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".RegisterActivity" />

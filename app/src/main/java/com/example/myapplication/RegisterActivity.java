@@ -1,12 +1,22 @@
 package com.example.myapplication;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
+import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
@@ -30,9 +40,12 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
         setContentView(R.layout.activity_register);
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow(); // in Activity's onCreate() for instance
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
         btnRegister = findViewById(R.id.btnRegister);
         regEmail = findViewById(R.id.regEmail);
         regAlamat = findViewById(R.id.regAlamat);
@@ -41,9 +54,19 @@ public class RegisterActivity extends AppCompatActivity {
         regHp = findViewById(R.id.regHp);
         regKtp = findViewById(R.id.regKtp);
 
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = inflater.inflate(R.layout.popup_window, null);
+
+        // create the popup window
+        int width = 800;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
                 @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 final String email = regEmail.getText().toString();
                 final String alamat = regAlamat.getText().toString();
                 final String password = regPassword.getText().toString();
@@ -68,10 +91,23 @@ public class RegisterActivity extends AppCompatActivity {
                             public void onResponse(JSONObject response) {
                                 String message = response.optString(Config.RESPONSE_MESSAGE_FIELD);
                                 if (message.equalsIgnoreCase(Config.RESPONSE_STATUS_VALUE_SUCCESS)) {
-                                    Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);//CUSTOMER
-                                    startActivity(intent);
-                                    finish();
-                                    finishAffinity();
+                                    popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                                    popupView.setOnTouchListener(new View.OnTouchListener() {
+                                        @Override
+                                        public boolean onTouch(View v, MotionEvent event) {
+                                            popupWindow.dismiss();
+                                            return true;
+                                        }
+                                    });
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);//CUSTOMER
+                                            startActivity(intent);
+                                            finish();
+                                            finishAffinity();
+                                        }
+                                    },4000);
                                 }else {
                                     Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
                                 }
@@ -93,6 +129,27 @@ public class RegisterActivity extends AppCompatActivity {
         Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
         startActivity(intent);
     }
+    public void popup(View view) {
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup_window, null);
 
+        // create the popup window
+        int width = 1000;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+    }
 }

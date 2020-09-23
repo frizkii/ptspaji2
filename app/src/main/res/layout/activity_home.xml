@@ -9,6 +9,7 @@
         android:background="#fff"
         tools:context=".HomeActivity">
 
+    =
     <RelativeLayout
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_width="match_parent"
@@ -20,7 +21,7 @@
                 android:layout_height="@dimen/_40sdp"/>
         <Button
                 android:id="@+id/btnprofil"
-                android:onClick="btnprofil"
+
                 android:text="Detil"
                 android:textColor="#fff"
                 android:layout_marginTop="@dimen/_8sdp"

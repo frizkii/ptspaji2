@@ -1,31 +1,25 @@
 package com.example.myapplication;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.example.myapplication.RS;
+
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.viewpager.widget.ViewPager;
-
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONArrayRequestListener;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -38,9 +32,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
         setContentView(R.layout.activity_main);
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow(); // in Activity's onCreate() for instance
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
         logEmail = findViewById(R.id.logEmail);
         logPassword = findViewById(R.id.logPassword);
         logBtnLog = findViewById(R.id.logBtnLog);
@@ -56,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
                 HashMap<String, String> body = new HashMap<>();
                 body.put("email", email);
                 body.put("password", password);
-
                     AndroidNetworking.post(Config.BASE_URL + "login")
                             .addBodyParameter(body)
                             .setPriority(Priority.MEDIUM)
@@ -75,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                                         intent.putExtra("userid",userid);
                                         startActivity(intent);
                                         if (role.equalsIgnoreCase("2"))
-                                            intent = new Intent(MainActivity.this, ViewCustomer.class);
+                                            intent = new Intent(MainActivity.this, WhereAdmin.class);
                                         startActivity(intent);
                                         Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
                                         finish();
@@ -102,17 +98,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void register(View view){
         Intent intent = new Intent(MainActivity.this,RegisterActivity.class);
         startActivity(intent);
     }
-
-    public void home(View view){
-        Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
-
-
-
 }

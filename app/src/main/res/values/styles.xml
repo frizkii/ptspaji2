@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:statusBarColor">#fff</item>
-        <item name="android:navigationBarColor">#416E6E6E</item>
+        <item name="android:navigationBarColor">#00000000</item>
 
     </style>
 

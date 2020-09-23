@@ -8,7 +8,6 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-
     <LinearLayout
             android:gravity="center_horizontal"
             android:layout_gravity="center_vertical"
@@ -75,7 +74,6 @@
 
             <Button
                     android:id="@+id/logBtnLog"
-                    android:onClick="home"
                     android:shadowColor="@null"
                     android:background="@drawable/btnlogin"
                     android:layout_width="@dimen/_55sdp"
