@@ -28,8 +28,6 @@ import java.util.Random;
 public class Config {
 
 
-
-
     /**
      * Created by WSeven7 on 1/2/2017.
      */
@@ -37,7 +35,7 @@ public class Config {
 
         //public static final String BASE_URL = " http://98102f27.ngrok.io/gma5/";
         //public static final String BASE_URL = "http://192.168.43.107/gma5/";
-        public static final String BASE_URL = "http://192.168.6.233:8000/api/";
+        public static final String BASE_URL = "http://192.168.6.96:8000/api/";
 
         private static final String API = "api/";
         public static final String BASE_URL_API = BASE_URL + API;

@@ -58,42 +58,42 @@ public class HomeActivity extends AppCompatActivity {
         btn = findViewById(R.id.btnprofil);
         dataList = findViewById(R.id.dataList);
 //        swp = findViewById(R.id.swipe_refresh2);
-        swp.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) this);
-        swp.post(new Runnable(){
-            @Override
-            public void run() {
-                getApi();
-            }
-        });
+//        swp.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) this);
+//        swp.post(new Runnable(){
+//            @Override
+//            public void run() {
+//                getApi();
+//            }
+//        });
         dataList.setHasFixedSize(true);
         dataList.setLayoutManager(new LinearLayoutManager(this));
 
-//
-//        titles = new ArrayList<>();
-//        images = new ArrayList<>();
-//        prices = new ArrayList<>();
-//
-//        titles.add("Pacific satu");
-//        titles.add("Pacific dua");
-//        titles.add("Pacific tiga");
-//        titles.add("Pacific empat");
-//
-//        prices.add("5000");
-//        prices.add("8000");
-//        prices.add("7000");
-//        prices.add("9000");
-//
-//        images.add(R.drawable.pacificoriblue);
-//        images.add(R.drawable.bromptonrodaor);
-//        images.add(R.drawable.pacificorblack);
-//        images.add(R.drawable.pacificputihbiru);
-//
-//        adapter = new Adapter(this,titles,images,prices);
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false);
-//        dataList.setLayoutManager(gridLayoutManager);
-//        dataList.setAdapter(adapter);
-//
-//        Bundle extras = getIntent().getExtras();
+
+        titles = new ArrayList<>();
+        images = new ArrayList<>();
+        prices = new ArrayList<>();
+
+        titles.add("Pacific satu");
+        titles.add("Pacific dua");
+        titles.add("Pacific tiga");
+        titles.add("Pacific empat");
+
+        prices.add("5000");
+        prices.add("8000");
+        prices.add("7000");
+        prices.add("9000");
+
+        images.add(R.drawable.pacificoriblue);
+        images.add(R.drawable.bromptonrodaor);
+        images.add(R.drawable.pacificorblack);
+        images.add(R.drawable.pacificputihbiru);
+
+        adapter = new Adapter(this,titles,images,prices);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false);
+        dataList.setLayoutManager(gridLayoutManager);
+        dataList.setAdapter(adapter);
+
+        Bundle extras = getIntent().getExtras();
 //        String value = extras.getString("userid");
 //        if(extras != null){
 //            String value = extras.getString("userid");
